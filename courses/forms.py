@@ -1,10 +1,20 @@
 from django import forms
-from .models import Course, Student
+from .models import Course, Student, Category, Instructor
 
 class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
         fields = ['title', 'description', 'price', 'category', 'instructor']
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['genero', 'nivel', 'projeto']
+
+class InstructorForm(forms.ModelForm):
+    class Meta:
+        model = Instructor
+        fields = ['user', 'formacao', 'curso', 'email', 'bio']
 
 
 class SearchForm(forms.Form):

@@ -1,17 +1,45 @@
 {% extends "index.html" %}
-{% block content %}
-<h2>Buscar Curso</h2>
-<form method="get">
-    {{ form.as_p }}
-    <button type="submit">Buscar</button>
-</form>
+{% load widget_tweaks %}
 
-{% if results %}
-  <h3>Resultados:</h3>
-  <ul>
-    {% for course in results %}
-      <li>{{ course.title }} - R$ {{ course.price }}</li>
-    {% endfor %}
-  </ul>
-{% endif %}
+{% block title %}Buscar Curso{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-primary">Buscar Curso</h2>
+
+    <!-- Formulário de busca -->
+    <div class="card shadow-sm p-4 mb-4">
+        <form method="get" class="row g-3">
+            {% for field in form %}
+                <div class="col-md-6">
+                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                    {{ field|add_class:"form-control" }}
+                </div>
+            {% endfor %}
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+                <a href="{% url 'home' %}" class="btn btn-secondary ms-2">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Resultados -->
+    {% if results %}
+    <h3 class="mb-3">Resultados:</h3>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for course in results %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ course.title }}</h5>
+                    <p class="card-text">Preço: <strong>R$ {{ course.price }}</strong></p>
+                    <a href="{% url 'course_detail' course.pk %}" class="btn btn-primary">Ver Detalhes</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
 {% endblock %}
+

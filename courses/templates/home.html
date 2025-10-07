@@ -1,10 +1,25 @@
 {% extends "index.html" %}
+{% load widget_tweaks %}
+
 {% block title %}Lista de Cursos{% endblock %}
+
 {% block content %}
-<h2>Cursos disponíveis</h2>
-<ul>
-  {% for course in courses %}
-    <li><a href="{% url 'course_detail' course.pk %}">{{ course.title }}</a> - R$ {{ course.price }}</li>
-  {% endfor %}
-</ul>
+<div class="container mt-5">
+    <h2 class="mb-4 text-center text-primary">Cursos Disponíveis</h2>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for course in courses %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ course.title }}</h5>
+                    <p class="card-text">Preço: <strong>R$ {{ course.price }}</strong></p>
+                    <a href="{% url 'course_detail' course.pk %}" class="btn btn-primary">Ver Detalhes</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
+

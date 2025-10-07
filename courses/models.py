@@ -5,6 +5,9 @@ User = get_user_model()
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
+    projeto = models.CharField(max_length=100, blank=True, null=True)
+    genero = models.CharField(max_length=50, blank=True, null=True)
+    nivel = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -12,6 +15,9 @@ class Category(models.Model):
 
 class Instructor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    formacao = models.CharField(max_length=100, blank=True, null=True)  # use sem acento
+    curso = models.CharField(max_length=100, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
     bio = models.TextField(blank=True)
 
     def __str__(self):

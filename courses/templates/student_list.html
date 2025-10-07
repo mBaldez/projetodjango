@@ -1,10 +1,25 @@
 {% extends "index.html" %}
+{% load widget_tweaks %}
+
 {% block title %}Lista de Alunos{% endblock %}
+
 {% block content %}
-<h2>Alunos</h2>
-<ul>
-  {% for s in students %}
-    <li>{{ s.full_name }} — CPF: {{ s.cpf }} — {{ s.email }}</li>
-  {% endfor %}
-</ul>
+<div class="container mt-5">
+    <h2 class="mb-4 text-primary">Alunos</h2>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for s in students %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ s.full_name }}</h5>
+                    <p class="card-text"><strong>CPF:</strong> {{ s.cpf }}</p>
+                    <p class="card-text"><strong>Email:</strong> {{ s.email }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
+

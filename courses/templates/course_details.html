@@ -1,6 +1,18 @@
 {% extends "index.html" %}
+{% load widget_tweaks %}
+
+{% block title %}{{ course.title }}{% endblock %}
+
 {% block content %}
-<h2>{{ course.title }}</h2>
-<p>{{ course.description }}</p>
-<p>Preço: R$ {{ course.price }}</p>
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title text-primary">{{ course.title }}</h2>
+            <p class="card-text">{{ course.description }}</p>
+            <p class="card-text"><strong>Preço:</strong> R$ {{ course.price }}</p>
+            <a href="{% url 'home' %}" class="btn btn-secondary mt-3">Voltar à lista de cursos</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
+

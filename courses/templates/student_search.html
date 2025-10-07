@@ -1,18 +1,45 @@
 {% extends "index.html" %}
-{% block title %}Buscar Aluno{% endblock %}
-{% block content %}
-<h2>Buscar Aluno</h2>
-<form method="get">
-    {{ form.as_p }}
-    <button type="submit">Buscar</button>
-</form>
+{% load widget_tweaks %}
 
-{% if results %}
-  <h3>Resultados:</h3>
-  <ul>
-    {% for s in results %}
-      <li>{{ s.full_name }} — CPF: {{ s.cpf }} — {{ s.email }}</li>
-    {% endfor %}
-  </ul>
-{% endif %}
+{% block title %}Buscar Aluno{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-primary">Buscar Aluno</h2>
+
+    <!-- Formulário de busca -->
+    <div class="card shadow-sm p-4 mb-4">
+        <form method="get" class="row g-3">
+            {% for field in form %}
+                <div class="col-md-6">
+                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                    {{ field|add_class:"form-control" }}
+                </div>
+            {% endfor %}
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+                <a href="{% url 'student_list' %}" class="btn btn-secondary ms-2">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Resultados -->
+    {% if results %}
+    <h3 class="mb-3">Resultados:</h3>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for s in results %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ s.full_name }}</h5>
+                    <p class="card-text"><strong>CPF:</strong> {{ s.cpf }}</p>
+                    <p class="card-text"><strong>Email:</strong> {{ s.email }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
 {% endblock %}
+
