@@ -1,0 +1,10 @@
+{% extends "index.html" %}
+{% block title %}Lista de Cursos{% endblock %}
+{% block content %}
+<h2>Cursos disponíveis</h2>
+<ul>
+  {% for course in courses %}
+    <li><a href="{% url 'course_detail' course.pk %}">{{ course.title }}</a> - R$ {{ course.price }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+{% block title %}Buscar Aluno{% endblock %}
+{% block content %}
+<h2>Buscar Aluno</h2>
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit">Buscar</button>
+</form>
+
+{% if results %}
+  <h3>Resultados:</h3>
+  <ul>
+    {% for s in results %}
+      <li>{{ s.full_name }} — CPF: {{ s.cpf }} — {{ s.email }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% endblock %}

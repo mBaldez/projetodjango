@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+{% block content %}
+<h2>Buscar Curso</h2>
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit">Buscar</button>
+</form>
+
+{% if results %}
+  <h3>Resultados:</h3>
+  <ul>
+    {% for course in results %}
+      <li>{{ course.title }} - R$ {{ course.price }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% endblock %}

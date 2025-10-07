@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Cursos Online{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Sistema de Cursos</h1>
+        <nav>
+            <a href="{% url 'home' %}">Home</a> |
+            <a href="{% url 'course_create' %}">Novo Curso</a> |
+            <a href="{% url 'search' %}">Buscar</a>
+        </nav>
+    </header>
+    <hr>
+    {% block content %}{% endblock %}
+
+    <nav>
+  <a href="{% url 'home' %}">Home</a> |
+  <a href="{% url 'course_create' %}">Novo Curso</a> |
+  <a href="{% url 'search' %}">Buscar Cursos</a> |
+  <a href="{% url 'student_list' %}">Alunos</a> |
+  <a href="{% url 'student_create' %}">Novo Aluno</a> |
+  <a href="{% url 'student_search' %}">Buscar Aluno</a>
+</nav>
+
+</body>
+</html>
