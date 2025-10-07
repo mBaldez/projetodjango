@@ -70,7 +70,11 @@ def category_create(request):
     if form.is_valid():
         form.save()
         return redirect('category_list')
-    return render(request, 'category_form.html', {'form': form})
+    return render(request, 'category_form.html', {
+        'form': form,
+        'title': 'Nova Categoria',
+        'list_url': 'category_list'
+        })
 
 def category_update(request, pk):
     category = get_object_or_404(Category, pk=pk)
@@ -95,7 +99,11 @@ def instructor_create(request):
     if form.is_valid():
         form.save()
         return redirect('instructor_list')
-    return render(request, 'instructor_form.html', {'form': form})
+    return render(request, 'instructor_form.html', {
+        'form': form,
+        'title': 'Novo Instrutor',
+        'list_url': 'instructor_list'
+        })
 
 def instructor_update(request, pk):
     instructor = get_object_or_404(Instructor, pk=pk)
