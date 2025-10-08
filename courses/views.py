@@ -14,15 +14,33 @@ def course_detail(request, pk):
 
 
 def course_create(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = CourseForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("home")
+            return redirect('course_list')
     else:
         form = CourseForm()
-    return render(request, "course_form.html", {"form": form})
 
+    return render(request, 'cursos/course_form.html', {'form': form})
+
+def course_list(request):
+    form = SearchForm(request.GET or None)
+    courses = Course.objects.select_related('category', 'instructor')
+
+    if form.is_valid() and form.cleaned_data['query']:
+        q = form.cleaned_data['query']
+        courses = courses.filter(
+            Q(title__icontains=q) |
+            Q(description__icontains=q) |
+            Q(category__name__icontains=q) |
+            Q(instructor__user__username__icontains=q)
+        )
+
+    return render(request, 'cursos/course_list.html', {
+        'courses': courses.order_by('-created_at'),
+        'form': form
+    })
 
 def search(request):
     form = SearchForm(request.GET)
@@ -36,8 +54,20 @@ def search(request):
 
 # ---- Students ----
 def student_list(request):
+    form = StudentSearchForm(request.GET or None)
     students = Student.objects.all()
-    return render(request, "student_list.html", {"students": students})
+
+    if form.is_valid() and form.cleaned_data['query']:
+        q = form.cleaned_data['query']
+        students = students.filter(
+            Q(full_name__icontains=q) | Q(cpf__icontains=q)
+        )
+
+    context = {
+        'students': students.order_by('-created_at'),
+        'form': form
+    }
+    return render(request, 'cursos/student_list.html', context)
 
 
 def student_create(request):

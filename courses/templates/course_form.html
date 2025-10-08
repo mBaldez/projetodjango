@@ -1,11 +1,11 @@
 {% extends "index.html" %}
 {% load widget_tweaks %}
 
-{% block title %}Criar Curso{% endblock %}
+{% block title %}Cadastrar Curso{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <h2 class="mb-4 text-primary">Criar Curso</h2>
+    <h2 class="mb-4 text-primary">Cadastrar Curso</h2>
     <div class="card shadow-sm p-4">
         <form method="post">
             {% csrf_token %}
@@ -14,16 +14,15 @@
                     <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
                     {{ field|add_class:"form-control" }}
                     {% if field.errors %}
-                        <div class="text-danger small mt-1">
-                            {{ field.errors }}
-                        </div>
+                        <div class="text-danger small mt-1">{{ field.errors }}</div>
                     {% endif %}
                 </div>
             {% endfor %}
             <button type="submit" class="btn btn-success">Salvar</button>
-            <a href="{% url 'home' %}" class="btn btn-secondary ms-2">Cancelar</a>
+            <a href="{% url 'course_list' %}" class="btn btn-secondary ms-2">Cancelar</a>
         </form>
     </div>
 </div>
 {% endblock %}
+
 

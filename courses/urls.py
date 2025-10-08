@@ -6,7 +6,8 @@ urlpatterns = [
     path('curso/<int:pk>/', views.course_detail, name='course_detail'),
     path('novo/', views.course_create, name='course_create'),
     path('buscar/', views.search, name='search'),
-
+    path('cursos/', views.course_list, name='course_list'),
+    
     # alunos
     path('alunos/', views.student_list, name='student_list'),
     path('aluno/novo/', views.student_create, name='student_create'),
