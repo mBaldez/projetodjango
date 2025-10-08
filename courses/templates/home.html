@@ -1,25 +1,67 @@
 {% extends "index.html" %}
-{% load widget_tweaks %}
 
-{% block title %}Lista de Cursos{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <h2 class="mb-4 text-center text-primary">Cursos Disponíveis</h2>
+<div class="container mt-4">
+    <h2 class="mb-4 text-primary">Dashboard</h2>
 
-    <div class="row row-cols-1 row-cols-md-2 g-4">
-        {% for course in courses %}
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">{{ course.title }}</h5>
-                    <p class="card-text">Preço: <strong>R$ {{ course.price }}</strong></p>
-                    <a href="{% url 'course_detail' course.pk %}" class="btn btn-primary">Ver Detalhes</a>
+    <div class="row g-4">
+
+        <!-- Card: Total de Cursos -->
+        <div class="col-md-3">
+            <div class="card card-stats bg-primary-light p-3">
+                <div class="card-body text-center">
+                    <h5>Total de Cursos</h5>
+                    <h2>{{ total_courses }}</h2>
+                    <i class="bi bi-journal-bookmark fs-1"></i>
                 </div>
             </div>
         </div>
-        {% endfor %}
+
+        <!-- Card: Total de Alunos -->
+        <div class="col-md-3">
+            <div class="card card-stats bg-success-light p-3">
+                <div class="card-body text-center">
+                    <h5>Total de Alunos</h5>
+                    <h2>{{ total_students }}</h2>
+                    <i class="bi bi-people fs-1"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Categorias -->
+        <div class="col-md-3">
+            <div class="card card-stats bg-warning-light p-3">
+                <div class="card-body text-center">
+                    <h5>Categorias</h5>
+                    <h2>{{ total_categories }}</h2>
+                    <i class="bi bi-tags fs-1"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Instrutores -->
+        <div class="col-md-3">
+            <div class="card card-stats bg-danger-light p-3">
+                <div class="card-body text-center">
+                    <h5>Instrutores</h5>
+                    <h2>{{ total_instructors }}</h2>
+                    <i class="bi bi-person-badge fs-1"></i>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mt-5">
+        <h3>Ações Rápidas</h3>
+        <div class="d-flex gap-3 flex-wrap">
+            <a href="{% url 'student_create' %}" class="btn btn-success btn-lg">Novo Aluno</a>
+            <a href="{% url 'course_create' %}" class="btn btn-primary btn-lg">Novo Curso</a>
+            <a href="{% url 'category_list' %}" class="btn btn-warning btn-lg">Gerenciar Categorias</a>
+            <a href="{% url 'instructor_list' %}" class="btn btn-danger btn-lg">Gerenciar Instrutores</a>
+        </div>
     </div>
 </div>
 {% endblock %}
-

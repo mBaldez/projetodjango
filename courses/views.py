@@ -4,8 +4,13 @@ from .models import Course, Student, Category, Instructor
 from .forms import CourseForm, SearchForm, StudentForm, StudentSearchForm, CategoryForm, InstructorForm
 
 def home(request):
-    courses = Course.objects.all()
-    return render(request, "index.html", {"courses": courses})
+    context = {
+        'total_students': Student.objects.count(),
+        'total_courses': Course.objects.count(),
+        'total_categories': Category.objects.count(),
+        'total_instructors': Instructor.objects.count()
+    }
+    return render(request, 'home.html', context)
 
 
 def course_detail(request, pk):
